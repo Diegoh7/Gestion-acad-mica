@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Prototipo de gestión académica: estudiantes, asistencia, calificaciones y reportes.">
+
+    <title>Plataforma Académica</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="excel.js" defer></script>
+    <script src="script.js" defer></script>
+    
+</head>
+
+<body>
+    <main id="acceso" class="acceso">
+        <section class="acceso-intro" aria-labelledby="tituloAcceso">
+            <div class="acceso-marca">
+                <span class="acceso-logo" aria-hidden="true"></span>
+                <strong>Plataforma Académica</strong>
+            </div>
+            <div>
+                <h1 id="tituloAcceso">El futuro de la <span>gestión académica</span></h1>
+                <p>Estudiantes, asistencia y calificaciones en un solo lugar para acompañar el progreso académico.</p>
+                <ul class="acceso-funciones">
+                    <li>Gestión de estudiantes y cursos</li>
+                    <li>Seguimiento de asistencia y calificaciones</li>
+                    <li>Reportes individuales con alertas académicas</li>
+                </ul>
+            </div>
+            <p class="acceso-pie">Prototipo académico · Datos locales</p>
+        </section>
+
+        <section class="acceso-panel" aria-labelledby="tituloFormulario">
+            <h2 id="tituloFormulario">Iniciar sesión</h2>
+            <p>Elige tu perfil e ingresa tus credenciales.</p>
+            <form id="formAcceso" novalidate>
+                <fieldset class="acceso-roles">
+                    <legend>Rol de acceso</legend>
+                    <div class="acceso-tarjetas">
+                        <label class="acceso-rol">
+                            <input type="radio" name="rol" value="administrador" checked required>
+                            <span class="acceso-rol-icono" aria-hidden="true">▦</span>
+                            <strong>Administrador</strong>
+                            <small>Acceso a todas las funciones.</small>
+                        </label>
+                        <label class="acceso-rol">
+                            <input type="radio" name="rol" value="docente" required>
+                            <span class="acceso-rol-icono" aria-hidden="true">✎</span>
+                            <strong>Docente</strong>
+                            <small>Consulta estudiantes, registra asistencia y notas, y genera reportes.</small>
+                        </label>
+                        <label class="acceso-rol">
+                            <input type="radio" name="rol" value="estudiante" required>
+                            <span class="acceso-rol-icono" aria-hidden="true">◇</span>
+                            <strong>Estudiante</strong>
+                            <small>Consulta tus notas, asistencias y reportes.</small>
+                        </label>
+                    </div>
+                </fieldset>
+                <label class="acceso-etiqueta" for="usuarioAcceso">Usuario</label>
+                <input id="usuarioAcceso" class="acceso-campo" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Ej. admin" required>
+                <label class="acceso-etiqueta" for="claveAcceso">Contraseña</label>
+                <div class="acceso-clave">
+                    <input id="claveAcceso" class="acceso-campo" name="clave" type="password" autocomplete="current-password" placeholder="Tu contraseña" required>
+                    <button id="alternarClave" type="button" aria-controls="claveAcceso">Mostrar</button>
+                </div>
+                <div id="opcionesClaveGuardada" class="acceso-opciones-clave" hidden>
+                    <label><input id="guardarClaveAcceso" type="checkbox"> Guardar contraseña</label>
+                    <button id="usarClaveGuardada" type="button">Usar contraseña guardada</button>
+                </div>
+                <button id="enviarAcceso" class="acceso-enviar" type="submit">Iniciar sesión</button>
+                <p id="estadoAcceso" class="acceso-estado" role="status" aria-atomic="true"></p>
+            </form>
+            <details class="acceso-demo">
+                <summary>Cuentas de demostración</summary>
+                <div id="cuentasDemo"></div>
+            </details>
+        </section>
+    </main>
+
+    <div class="aplicacion" hidden>
+
+        <!-- MENÚ LATERAL -->
+        <aside class="sidebar">
+
+            <div class="marca">
+                <span class="marca-icono"></span>
+
+                <div>
+                    <strong>Plataforma Académica</strong>
+                    
+                </div>
+            </div>
+
+            <nav class="menu" aria-label="Menú principal">
+
+                <button type="button"
+                        class="menu-opcion activo"
+                        data-modulo="inicio">
+                     <span aria-hidden="true"></span>
+                    <span>Inicio</span>
+                </button>
+
+                <button type="button"
+                        class="menu-opcion"
+                        data-modulo="estudiantes">
+                     <span aria-hidden="true"></span>
+                    <span>Estudiantes</span>
+                </button>
+
+                <button type="button"
+                        class="menu-opcion"
+                        data-modulo="asistencia">
+                     <span aria-hidden="true"></span>
+                    <span>Asistencia</span>
+                </button>
+
+                <button type="button"
+                        class="menu-opcion"
+                        data-modulo="calificaciones">
+                     <span aria-hidden="true"></span>
+                    <span>Calificaciones</span>
+                </button>
+
+                <button type="button"
+                        class="menu-opcion"
+                        data-modulo="boletines">
+                     <span aria-hidden="true"></span>
+                    <span>Boletines</span>
+                </button>
+
+                <button type="button"
+                        class="menu-opcion"
+                        data-modulo="pruebas">
+                    <span aria-hidden="true"></span>
+                    <span>Pruebas experimentales</span>
+                </button>
+
+                <button type="button"
+                        class="menu-opcion"
+                        data-modulo="reportes">
+                     <span aria-hidden="true"></span>
+                    <span>Reportes</span>
+                </button>
+
+            </nav>
+
+            <div class="sidebar-pie">
+                Prototipo académico · Etapa 4
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="zona-principal">
+
+            <header class="barra-superior">
+
+                <div>
+                    <h1 id="tituloPagina">
+                        Panel de inicio
+                    </h1>
+
+                    <p>
+                        Administración y seguimiento académico
+                    </p>
+                </div>
+
+                <div class="cabecera-derecha">
+
+                    <!-- INDICADOR DE CONEXIÓN -->
+                    <div id="estadoConexion"
+                         class="estado-conexion"
+                         role="status">
+
+                        <span class="punto-conexion"></span>
+
+                        <span id="textoConexion">
+                            Comprobando conexión...
+                        </span>
+
+                    </div>
+
+                    <span id="usuarioPanel" class="usuario"></span>
+                    <button id="cerrarSesion" class="btn btn-secundario" type="button">
+                        Cerrar sesión
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- AQUÍ APARECEN LOS MÓDULOS -->
+            <main id="contenido" tabindex="-1"></main>
+
+            <footer class="pie-pagina">
+                Plataforma Académica · Prototipo demostrativo
+                con almacenamiento local
+            </footer>
+
+        </div>
+
+    </div>
+
+    <!-- NOTIFICACIONES -->
+    <div id="avisos"
+         class="avisos"
+         aria-live="polite"
+         aria-atomic="true">
+    </div>
+
+</body>
+</html>
+
+
